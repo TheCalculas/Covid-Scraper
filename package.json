@@ -1,0 +1,16 @@
+{
+  "name": "corona-scraper",
+  "version": "1.0.0",
+  "description": "It scraps covid info to a xlsx file",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "Dharmesh Sharma",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
+    "request": "^2.88.2",
+    "xlsx": "^0.18.4"
+  }
+}
