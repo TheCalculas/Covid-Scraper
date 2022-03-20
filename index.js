@@ -2,7 +2,6 @@ const request = require("request");
 const cheerio = require("cheerio");
 const xlsx = require("xlsx");
 const url = "https://www.worldometers.info/coronavirus/";
-
 request(url, cb);
 
 function cb(error, response, html) {
@@ -17,12 +16,14 @@ function handlehtml(html) {
   let $ = cheerio.load(html);
   const ScrapedJSON = [];
   const Headers = [
+    "Sno.",
     "Country,Other",
     "Total Cases",
     "New Cases",
     "Total Deaths",
     "New Deaths",
     "Total Recovered",
+    "New Recovered",
     "Acive Cases",
     "Serious, Critical",
     "Total Cases/1M Populatio n",
@@ -36,7 +37,9 @@ function handlehtml(html) {
     const tds = $(element).find("td");
     const tableRow = {};
     $(tds).each((i, element) => {
-      tableRow[Headers[i]] = $(element).text().trim().replace("\n", "");
+      if (i < 15)
+        // as only 15 columns are there :)
+        tableRow[Headers[i]] = $(element).text().trim().replace("\n", "");
     });
     ScrapedJSON.push(tableRow);
   });
